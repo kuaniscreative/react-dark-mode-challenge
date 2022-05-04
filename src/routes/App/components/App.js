@@ -1,17 +1,32 @@
-import React from 'react';
+import clsx from 'clsx';
+import { useState }  from 'react';
 import DarkModeButton from './DarkModeButton/DarkModeButton';
 import '../styles/_app.scss';
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const rootClassName = clsx(
+    'app',
+    isDarkMode ? 'dark-mode' : null
+  )
+
+  const onDarkModeButtonClick = () => {
+    setIsDarkMode(!isDarkMode)
+  }
+
   return (
-    <div className="app">
+    <div className={rootClassName}>
       <div className="level">
         <div>
           <h1 className="title">Dark Mode Challenge</h1>
         </div>
 
         {/* --The button that should toggle dark mode-- */}
-        <DarkModeButton className="level-right"/>
+        <DarkModeButton 
+          className="level-right"
+          isDarkMode={isDarkMode}
+          onClick={onDarkModeButtonClick}
+        />
 
       </div>
 
