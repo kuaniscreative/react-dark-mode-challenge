@@ -1,18 +1,19 @@
 import clsx from 'clsx';
-import { useState }  from 'react';
+import { useContext }  from 'react';
 import DarkModeButton from './DarkModeButton/DarkModeButton';
+import { DarkModeContext } from '../constants/context';
 import '../styles/_app.scss';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const {
+    isDarkMode,
+    toggleDarkMode,
+  }  = useContext(DarkModeContext);
+
   const rootClassName = clsx(
     'app',
     isDarkMode ? 'dark-mode' : null
   )
-
-  const onDarkModeButtonClick = () => {
-    setIsDarkMode(!isDarkMode)
-  }
 
   return (
     <div className={rootClassName}>
@@ -25,7 +26,7 @@ function App() {
         <DarkModeButton 
           className="level-right"
           isDarkMode={isDarkMode}
-          onClick={onDarkModeButtonClick}
+          onClick={toggleDarkMode}
         />
 
       </div>
